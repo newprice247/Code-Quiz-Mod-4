@@ -4,10 +4,10 @@ console.log(question)
 var quizButtons = document.querySelectorAll(`.quiz-buttons`);
 console.log(quizButtons)
 
-var button1 = document.getElementById(`b1`)
-var button2 = document.getElementById(`b2`)
-var button3 = document.getElementById(`b3`)
-var button4 = document.getElementById(`b4`)
+var b1 = document.getElementById(`b1`)
+var b2 = document.getElementById(`b2`)
+var b3 = document.getElementById(`b3`)
+var b4 = document.getElementById(`b4`)
 
 var quizBox = document.getElementById(`quiz-box`);
 console.log(quizBox)
@@ -25,8 +25,8 @@ function startQuiz() {
     quizButtons.forEach(button => {
         button.setAttribute(`style`, `display: none;`)
       });
-    button1.textContent = `Click here to start!`
-    button1.addEventListener("click", function() {
+    b1.textContent = `Click here to start!`
+    b1.addEventListener("click", function() {
         question1();
         quizButtons.forEach(button => {
             button.removeAttribute(`style`, `display: none;`)
@@ -36,34 +36,79 @@ function startQuiz() {
 
 var question1 = () => {
     question.textContent = `What is the name of JavaScript?`
-        button1.textContent = `JavaScript`;
-        button1.addEventListener("click", function() {
-            question2();
-        })
+    b1.textContent = `JavaScript`;
+    b1.addEventListener("click", function() {
+        points += 25;
+        question2();
+    })
+    b2.textContent = `HTML`;
+    b2.addEventListener("click", function() {
+    })
+    b3.textContent = `CSS`;
+    b3.addEventListener("click", function() {
+    })
+    b4.textContent = `VsCode`;
+    b4.addEventListener("click", function() {
+    })
+
 }
 
 var question2 = () => {
     question.textContent = `What is the name of HTML?`
-        button1.textContent = `JavaScript`;
-        button1.addEventListener("click", function() {
-            question2();
+        b1.textContent = `CSS`;
+        b1.addEventListener("click", function() {
+        })
+        b2.textContent = `JavaScript`;
+        b2.addEventListener("click", function() {
+        })
+        b3.textContent = `VSCode`;
+        b3.addEventListener("click", function() {
+        })
+        b4.textContent = `HTML`;
+        b4.addEventListener("click", function() {
+            points += 25;
+            question3();
         })
 }
 
 var question3 = () => {
     question.textContent = `What is the name of CSS?`
-        button1.textContent = `JavaScript`;
-        button1.addEventListener("click", function() {
-            question2();
+        b1.textContent = `VSCode`;
+        b1.addEventListener("click", function() {
+        })
+        b2.textContent = `JavaScript`;
+        b2.addEventListener("click", function() {
+        })
+        b3.textContent = `HTML`;
+        b3.addEventListener("click", function() {
+        })
+        b4.textContent = `CSS`;
+        b4.addEventListener("click", function() {
+            points += 25;
+            question4();
         })
 }
 
 var question4 = () => {
     question.textContent = `What is the name of this program?`
-        button1.textContent = `JavaScript`;
-        button1.addEventListener("click", function() {
-            question2();
+        b1.textContent = `HTML`;
+        b1.addEventListener("click", function() {
         })
+        b2.textContent = `CSS`;
+        b2.addEventListener("click", function() {
+        })
+        b3.textContent = `JavaScript`;
+        b3.addEventListener("click", function() {
+        })
+        b4.textContent = `VsCode`;
+        b4.addEventListener("click", function() {
+            points += 25;
+            finalScore();
+        })
+}
+
+var finalScore = () => {
+    question.textContent
 }
 
 startQuiz();
