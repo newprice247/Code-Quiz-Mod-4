@@ -17,6 +17,10 @@ header a {
     color: purple;
 }
 
+header a:hover {
+    text-shadow: 0 0 5px rgb(255, 156, 255);
+}
+
 #container {
     display: flex;
     align-items: center;
@@ -26,8 +30,42 @@ header a {
 #quiz-box {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    background-color: blue;
-    height: 40vh;
+    justify-content: center;
+    border: .3em solid black;
+    border-radius: .5em;
     width: 60vw;
+    padding-bottom: 3em;
+}
+
+#quiz-box h1 {
+    font-size: 1.5em;
+    margin: 1em;
+
+}
+
+#quiz-box button {
+    font-size: large;
+    margin: .5em;
+    padding: .7em;
+    width: 50%;
+    word-wrap: break-word;
+    text-align: left;
+    background-color: purple;
+    color: white;
+    border-radius: .5em;
+}
+
+#quiz-box button:hover {
+    background-color: rgb(167, 63, 167);
+    box-shadow: 0 0 5px purple;
+}
+
+#quiz-box p {
+    color: rgb(109, 109, 109);
+    font-size: 1.5em;
+    text-align: left;
+    margin: .6em;
+    padding-top: .3em;
+    border-top: solid lightgray 3px;
+
 }
