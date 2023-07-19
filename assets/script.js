@@ -53,42 +53,57 @@ var started = true;
 var score = 0;
 
 var startQuiz = () => {
-
-}
-
-
-var quizIndex = 0;
-var checkAnswer = (event) => {
-    console.log('l;kj')
-    const choice = event.target.innerHTML;
-    if (started) {
-        setTime()
-        // var currentQuestion = quiz[quizIndex];
-        if (choice === correctAnswer) {
-            score += 25;
+    for (i = 0; i < quiz.length; i++) {
+        console.log(quiz[i])
+        quizBox.innerHTML = `
+        <h1 id="question">${quiz[i].question}</h1>
+                <button class="b1" id="">${quiz[i].options[0]}</button>
+                <button class="b2" id="">${quiz[i].options[1]}</button>
+                <button class="b3" id="">${quiz[i].options[2]}</button>
+                <button class="b4" id="">${quiz[i].options[3]}</button>
+                <p id="answer-result"></p>
+        `
+        b1.addEventListener(`click`, function () {
+            if (correctAnswer) {
+                score += 25;
+            }
         }
-        question.innerHTML = quiz[quizIndex].question
-        b1.innerHTML = quiz[quizIndex].options[0]
-        b2.innerHTML = quiz[quizIndex].options[1]
-        b3.innerHTML = quiz[quizIndex].options[2]
-        b4.innerHTML = quiz[quizIndex].options[3]
-        correctAnswer = quiz[quizIndex].answer
-        console.log(score)
-        quizIndex++
-        if (quizIndex >= 4) {
-            showresults();
-        }
+        )
     }
-    // } else {
-    //     b1.innerHTML = quiz[0].options[0]
-    //     b2.innerHTML = quiz[0].options[1]
-    //     b3.innerHTML = quiz[0].options[2]
-    //     b4.innerHTML = quiz[0].options[3]
-    //     correctAnswer = quiz[0].answer
-    //     started = false;
-    // }
-    // const choice = event.target.className;
 }
+
+
+// var quizIndex = 0;
+// var checkAnswer = (event) => {
+//     console.log('l;kj')
+//     const choice = event.target.innerHTML;
+//     if (started) {
+//         setTime()
+//         // var currentQuestion = quiz[quizIndex];
+//         if (choice === correctAnswer) {
+//             score += 25;
+//         }
+//         question.innerHTML = quiz[quizIndex].question
+//         b1.innerHTML = quiz[quizIndex].options[0]
+//         b2.innerHTML = quiz[quizIndex].options[1]
+//         b3.innerHTML = quiz[quizIndex].options[2]
+//         b4.innerHTML = quiz[quizIndex].options[3]
+//         correctAnswer = quiz[quizIndex].answer
+//         console.log(score)
+//         quizIndex++
+//         if (quizIndex >= 4) {
+//             showresults();
+//         }
+//     } else {
+//         b1.innerHTML = quiz[0].options[0]
+//         b2.innerHTML = quiz[0].options[1]
+//         b3.innerHTML = quiz[0].options[2]
+//         b4.innerHTML = quiz[0].options[3]
+//         correctAnswer = quiz[0].answer
+//         started = false;
+//     }
+//     // const choice = event.target.className;
+// }
 
 function updateTimer() {
     timer.textContent = `Time left: ${secondsLeft}`
@@ -105,8 +120,10 @@ function setTime() {
             secondsLeft = 10;
             timerFailState();
 
+        
         }
     }, 1000)
+    return stopTimerID
     
 }
 
@@ -115,6 +132,8 @@ function timerFailState() {
     <h1 id="question">Sorry your time has run out!</h1>
     <button class="b1" id="">Please Click Here to Start Over</button>
     `
+    b1.removeEventListener(`click`, checkAnswer)
+    b1.addEventListener(`click`, checkAnswer)
 }
 
 var showresults = () => {
@@ -125,10 +144,10 @@ var showresults = () => {
     `
 }
 
-b1.addEventListener(`click`, checkAnswer)
-b2.addEventListener(`click`, checkAnswer)
-b3.addEventListener(`click`, checkAnswer)
-b4.addEventListener(`click`, checkAnswer)
+// b1.addEventListener(`click`, checkAnswer)
+// b2.addEventListener(`click`, checkAnswer)
+// b3.addEventListener(`click`, checkAnswer)
+// b4.addEventListener(`click`, checkAnswer)
 
 // console.log(currentQuestion)
 
