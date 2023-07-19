@@ -4,6 +4,8 @@ var question = document.getElementById(`question`)
 // var quizButtons = document.querySelectorAll(`.quiz-buttons`);
 // // console.log(quizButtons)
 
+var timer = document.getElementById(`timer`);
+
 var b1 = document.querySelector(`.b1`)
 var b2 = document.querySelector(`.b2`)
 var b3 = document.querySelector(`.b3`)
@@ -11,8 +13,8 @@ var b4 = document.querySelector(`.b4`)
 
 // var answerResult = document.getElementById(`answer-result`)
 
-// var quizBox = document.getElementById(`quiz-box`);
-// console.log(quizBox)
+var quizBox = document.getElementById(`quiz-box`);
+console.log(quizBox)
 
 // var header = document.querySelector('header');
 // // console.log(header)
@@ -51,19 +53,20 @@ var started = true;
 var score = 0;
 
 var startQuiz = () => {
-    
+
 }
 
+
+var quizIndex = 0;
 var checkAnswer = (event) => {
     console.log('l;kj')
+    const choice = event.target.innerHTML;
     if (started) {
-        const choice = event.target.innerHTML;
-        var quizIndex = 0;
+        setTime()
         // var currentQuestion = quiz[quizIndex];
-        if(choice === correctAnswer) {
+        if (choice === correctAnswer) {
             score += 25;
         }
-        quizIndex++
         question.innerHTML = quiz[quizIndex].question
         b1.innerHTML = quiz[quizIndex].options[0]
         b2.innerHTML = quiz[quizIndex].options[1]
@@ -71,15 +74,55 @@ var checkAnswer = (event) => {
         b4.innerHTML = quiz[quizIndex].options[3]
         correctAnswer = quiz[quizIndex].answer
         console.log(score)
-    } else {
-        b1.innerHTML = quiz[0].options[0]
-        b2.innerHTML = quiz[0].options[1]
-        b3.innerHTML = quiz[0].options[2]
-        b4.innerHTML = quiz[0].options[3]
-        correctAnswer = quiz[0].answer
-        started = false;
+        quizIndex++
+        if (quizIndex >= 4) {
+            showresults();
+        }
     }
+    // } else {
+    //     b1.innerHTML = quiz[0].options[0]
+    //     b2.innerHTML = quiz[0].options[1]
+    //     b3.innerHTML = quiz[0].options[2]
+    //     b4.innerHTML = quiz[0].options[3]
+    //     correctAnswer = quiz[0].answer
+    //     started = false;
+    // }
     // const choice = event.target.className;
+}
+
+function updateTimer() {
+    timer.textContent = `Time left: ${secondsLeft}`
+}
+
+var secondsLeft = 10;
+function setTime() {
+    var stopTimerID = window.setInterval(function () {
+        secondsLeft--;
+        updateTimer();
+        console.log(`${secondsLeft}`)
+        if (secondsLeft <= 0) {
+            clearInterval(stopTimerID)
+            secondsLeft = 10;
+            timerFailState();
+
+        }
+    }, 1000)
+    
+}
+
+function timerFailState() {
+    quizBox.innerHTML = `
+    <h1 id="question">Sorry your time has run out!</h1>
+    <button class="b1" id="">Please Click Here to Start Over</button>
+    `
+}
+
+var showresults = () => {
+    quizBox.innerHTML = `
+    <h1 id="question">Your Score is ${score}</h1>
+    <button class="b1" id="">Please Click Here to Start Over</button>
+    <form action="post"></form>
+    `
 }
 
 b1.addEventListener(`click`, checkAnswer)
