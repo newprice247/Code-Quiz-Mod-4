@@ -7,14 +7,15 @@ var timer = document.getElementById(`timer`);
 // var b3 = document.querySelector(`.b3`)
 // var b4 = document.querySelector(`.b4`)
 
-// var answerResult = document.getElementById(`answer-result`)
+var answerResult = document.getElementById(`answer-result`)
 
 var quizBox = document.getElementById(`quiz-box`);
 console.log(quizBox)
 
 // var header = document.querySelector('header');
 // // console.log(header)
-
+var quizQuestion = document.getElementById(`quiz-question`)
+    console.log(quizQuestion)
 // var scoreLink = document.getElementById("score-link");
 // console.log(scoreLink)
 var quizButtons = document.querySelectorAll(`.quiz-buttons`);
@@ -24,45 +25,67 @@ const quiz = [
     {
         question: "What is the output of the following code? console.log(10 % 3);",
         options: ["10", "1", "3", "0"],
-        answer: "1"
+        answer: 1
     },
     {
         question: "Which function is used to print text to the console in JavaScript?",
         options: ["console.log()", "print()", "document.write()", "alert()"],
-        answer: "console.log()"
+        answer: 0
     },
     {
         question: "What does the '+' operator do when used with strings in JavaScript?",
         options: ["Adds the strings together", "Performs mathematical addition", "Throws an error", "Converts strings to numbers"],
-        answer: "Adds the strings together"
+        answer: 0
     },
     {
         question: "What is the correct way to declare a variable in JavaScript?",
         options: ["variable x;", "var x;", "x = var;", "var = x;"],
-        answer: "var x;"
+        answer: 1
     }
 ];
 
 // console.log()
 // var correctAnswer;
 
-// var score = 0;
+var score = 0;
 
 quizButtons.forEach(element => {
     element.setAttribute(`style`, `display: none;`)
 })
 b1.removeAttribute(`style`, `display: none;`)
 
-function test(q,i) {
+var quizIndex =0
+
+function test() {
 
     console.log(`quiz started`)
-    var quizQuestion = document.getElementById(`quiz-question`)
-    console.log(quizQuestion)
-    quizQuestion.textContent = q[i].question;
+    quizQuestion.textContent = quiz[quizIndex].question;
 
     quizButtons.forEach(function(element, index) {
         element.removeAttribute(`style`, `display: none;`)
-        element.textContent = q[i].options[index]
+        element.textContent = quiz[quizIndex].options[index]
+        element.addEventListener('click', function() {
+            if (quiz[quizIndex].answer == index) {
+                score += 25;
+                console.log(`score`);
+                answerResult.textContent = `Correct! Total Points: ${score}`;
+                quizIndex++;
+                if (quizIndex > 4) {
+                    test()
+                } else {
+                    showResults()
+                }
+            } else {
+                console.log(score)
+                answerResult.textContent = `Wrong! Total Points: ${score}`
+                quizIndex++;
+                if (quizIndex > 4) {
+                    test()
+                } else {
+                    showResults()
+                }
+            }
+        })
     })
 }
 
@@ -70,7 +93,7 @@ function test(q,i) {
 
 
 b1.addEventListener(`click`, function() {
-    test(quiz, 0)
+    test()
 })
 // var started = false;
 
@@ -136,13 +159,19 @@ b1.addEventListener(`click`, function() {
 //     b1.addEventListener(`click`, startQuiz)
 // }
 
-// var showresults = () => {
-//     quizBox.innerHTML = `
-//     <h1 id="question">Your Score is ${score}</h1>
-//     <button class="b1" id="">Please Click Here to Start Over</button>
-//     <form action="post"></form>
-//     `
-// }
+var showResults = () => {
+    quizQuestion.textContent = `Your Final Score was ${score}`
+    quizButtons.forEach(element => {
+        element.setAttribute(`style`, `display: none;`)
+    })
+    b1.removeAttribute(`style`, `display: none;`)
+    b1.textContent= `Click Here to Try Again.`
+    b1.addEventListener(`click`, `function() {
+        score = 0;
+        quizIndex = 0;
+        test();
+    }`)
+}
 
 
 // b2.addEventListener(`click`, checkAnswer)
