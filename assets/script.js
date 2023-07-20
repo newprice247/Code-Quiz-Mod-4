@@ -72,6 +72,7 @@ var checkAnswer = (event) => {
     if (started) {
         if (choice === correctAnswer) {
             score += 25;
+            answerResult.style.borderTop = `solid`, `black`;
             answerResult.textContent = `Correct! Total Score = ${score}/100`
         } else {
             answerResult.innerHTML = `Wrong! The correct answer was: <br>${quiz[quizIndex].answer} <br>Total Score = ${score}/100`
@@ -150,7 +151,9 @@ function reset() {
     startNext.removeAttribute(`style`, `display: none;`)
     quizButtons.forEach(element => {
         element.setAttribute(`style`, `display: none;`)
+    
     })
+    answerResult.style.borderTop = `none`;
 
 }
 
