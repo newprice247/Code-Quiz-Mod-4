@@ -12,14 +12,12 @@ var answerResult = document.getElementById(`answer-result`)
 var quizBox = document.getElementById(`quiz-box`);
 console.log(quizBox)
 
-// var header = document.querySelector('header');
-// // console.log(header)
 var quizQuestion = document.getElementById(`quiz-question`)
-    console.log(quizQuestion)
+console.log(quizQuestion)
 // var scoreLink = document.getElementById("score-link");
 // console.log(scoreLink)
 var quizButtons = document.querySelectorAll(`.quiz-buttons`);
-    console.log(quizButtons)
+console.log(quizButtons)
 
 const quiz = [
     {
@@ -44,65 +42,23 @@ const quiz = [
     }
 ];
 
-// console.log()
-
-
-// var score = 0;
-
 quizButtons.forEach(element => {
     element.setAttribute(`style`, `display: none;`)
 })
 b1.removeAttribute(`style`, `display: none;`)
 
-
-
-// function test() {
-
-//     console.log(`quiz started`)
-//     quizQuestion.textContent = quiz[quizIndex].question;
-
-//     quizButtons.forEach(function(element, index) {
-//         element.removeAttribute(`style`, `display: none;`)
-
-//         element.textContent = quiz[quizIndex].options[index]
-
-//         element.addEventListener('click', function() {
-//             if (quiz[quizIndex].answer == index) {
-//                 score += 25;
-//                 console.log(score);
-//                 answerResult.textContent = `Correct! Total Points: ${score}`;
-//             } else {
-//                 console.log(score)
-//                 answerResult.textContent = `Wrong! Total Points: ${score}`
-//             }
-//             quizIndex ++    
-//             if (quizIndex <= 3) {
-//                 test()
-//             } else {
-//                 showResults()
-//             }
-//         })
-//     })
-// }
-
-// test(quiz, 0)
-
-
-// b1.addEventListener(`click`, function() {
-//     test()
-// })
-// var started = false;
-quizQuestion.textContent = `Welcome to the Code Quiz!`
+quizQuestion.textContent = `Welcome to the Code Quiz!`;
+b1.textContent = `Please Click Here to Continue`;
 
 var correctAnswer;
-var quizIndex =0;
-started = false;
-var score = 0;
 var quizIndex = 0;
+started = false;
+var quizIndex = 0;
+var score = 0;
 
 var checkAnswer = (event) => {
     console.log(`event fired + ${quizIndex}`)
-    
+    quizQuestion.style.color = `black`;
     quizButtons.forEach(element => {
         element.removeAttribute(`style`, `display: none;`)
     })
@@ -112,7 +68,7 @@ var checkAnswer = (event) => {
 
         if (choice === correctAnswer) {
             score += 25;
-        } 
+        }
 
         quizIndex++
         console.log(quizIndex)
@@ -120,14 +76,15 @@ var checkAnswer = (event) => {
         if (quizIndex > quiz.length - 1) {
             showResults();
         } else {
-        quizQuestion.innerHTML = quiz[quizIndex].question
-        b1.innerHTML = quiz[quizIndex].options[0]
-        b2.innerHTML = quiz[quizIndex].options[1]
-        b3.innerHTML = quiz[quizIndex].options[2]
-        b4.innerHTML = quiz[quizIndex].options[3]
-        correctAnswer = quiz[quizIndex].answer
-        console.log(score)
-        console.log(quizIndex)}
+            quizQuestion.innerHTML = quiz[quizIndex].question
+            b1.innerHTML = quiz[quizIndex].options[0]
+            b2.innerHTML = quiz[quizIndex].options[1]
+            b3.innerHTML = quiz[quizIndex].options[2]
+            b4.innerHTML = quiz[quizIndex].options[3]
+            correctAnswer = quiz[quizIndex].answer
+            console.log(score)
+            console.log(quizIndex)
+        }
 
     } else {
         quizQuestion.innerHTML = quiz[0].question
@@ -139,58 +96,60 @@ var checkAnswer = (event) => {
         started = true;
         setTime();
     }
-    // const choice = event.target.className;
 }
 
 function updateTimer() {
     timer.textContent = `Seconds left to complete quiz: ${secondsLeft}`
 }
 
-var secondsLeft = 5;
+var stopTimerID;
+var stopTimerID_array = [];
+var secondsLeft = 21;
 function setTime() {
-    var stopTimerID = window.setInterval(function () {
+        stopTimerID = window.setInterval(function () {
         secondsLeft--;
         updateTimer();
-        console.log(`${secondsLeft}`)
+        // console.log(`${secondsLeft}`)
         if (secondsLeft <= 0) {
-            clearInterval(stopTimerID)
-            secondsLeft = 10;
+            secondsLeft = 21;
             timerFailState();
-
-
         }
     }, 1000)
+    stopTimerID_array.push(stopTimerID);
+    // console.log(`stop timer id = ${stopTimerID}`)
     return stopTimerID
+}
 
+function callClearInterval() {
+    for(var i = 0; i < stopTimerID_array.length; i++) {
+        clearInterval(stopTimerID_array[i])
+    };
+}
+
+function reset() {
+    callClearInterval();
+    started = false;
+    quizIndex = 0;
+    timer.style.display = `none`;
+    quizButtons.forEach(element => {
+        element.setAttribute(`style`, `display: none;`)
+    })
+    b1.removeAttribute(`style`, `display: none;`)
 }
 
 function timerFailState() {
-    started = false;
+    reset();
     score = 0;
-    quizIndex = 0;
-    quizButtons.forEach(element => {
-        element.setAttribute(`style`, `display: none;`)
-    })
-    b1.removeAttribute(`style`, `display: none;`)
     quizQuestion.textContent = `Sorry your time has run out!`
+    quizQuestion.style.color = `red`
     b1.textContent = `Click Here to Try Again.`
-    // b1.addEventListener(`click`, )
 }
 
 var showResults = () => {
-    started = false;
+    reset();
     quizQuestion.textContent = `Your Final Score was ${score}`
+    b1.textContent = `Click Here to Try Again.`
     score = 0;
-    quizIndex = 0;
-    quizButtons.forEach(element => {
-        element.setAttribute(`style`, `display: none;`)
-    })
-    b1.removeAttribute(`style`, `display: none;`)
-    b1.textContent= `Click Here to Try Again.`
-    console.log(quizIndex)
-    console.log(score)
-    console.log(started)
-    
 }
 
 b1.addEventListener(`click`, checkAnswer)

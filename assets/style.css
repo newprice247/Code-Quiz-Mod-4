@@ -21,6 +21,11 @@ header a:hover {
     text-shadow: 0 0 5px rgb(255, 156, 255);
 }
 
+header p {
+    color: blue;
+    font-size: 1.5em;
+}
+
 #container {
     display: flex;
     align-items: center;
