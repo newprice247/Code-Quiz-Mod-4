@@ -57,6 +57,7 @@ var quizIndex = 0;
 var score = 0;
 
 var checkAnswer = (event) => {
+    timer.style.display = `block`;
     console.log(`event fired + ${quizIndex}`)
     quizQuestion.style.color = `black`;
     quizButtons.forEach(element => {
@@ -114,21 +115,24 @@ function setTime() {
         stopTimerID = window.setInterval(function () {
         secondsLeft--;
         updateTimer();
-        // console.log(`${secondsLeft}`)
+        console.log(`array: ${stopTimerID_array} seconds:${secondsLeft}`)
         if (secondsLeft <= 0) {
             secondsLeft = 11;
             timerFailState();
         }
     }, 1000)
     stopTimerID_array.push(stopTimerID);
+    console.log(stopTimerID_array)
     // console.log(`stop timer id = ${stopTimerID}`)
-    return stopTimerID
+    // return stopTimerID
 }
 
 function callClearInterval() {
     for(var i = 0; i < stopTimerID_array.length; i++) {
+        console.log(`stopping: ${stopTimerID_array[i]}`)
         clearInterval(stopTimerID_array[i])
     };
+    secondsLeft = 11;
 }
 
 function reset() {
