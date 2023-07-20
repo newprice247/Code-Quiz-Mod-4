@@ -137,16 +137,16 @@ var checkAnswer = (event) => {
         b4.innerHTML = quiz[0].options[3]
         correctAnswer = quiz[0].answer
         started = true;
-        // setTime();
+        setTime();
     }
     // const choice = event.target.className;
 }
 
 function updateTimer() {
-    timer.textContent = `Time left: ${secondsLeft}`
+    timer.textContent = `Seconds left to complete quiz: ${secondsLeft}`
 }
 
-var secondsLeft = 10;
+var secondsLeft = 5;
 function setTime() {
     var stopTimerID = window.setInterval(function () {
         secondsLeft--;
@@ -165,10 +165,15 @@ function setTime() {
 }
 
 function timerFailState() {
-    quizBox.innerHTML = `
-    <h1 id="question">Sorry your time has run out!</h1>
-    <button class="b1" id="">Please Click Here to Start Over</button>
-    `
+    started = false;
+    score = 0;
+    quizIndex = 0;
+    quizButtons.forEach(element => {
+        element.setAttribute(`style`, `display: none;`)
+    })
+    b1.removeAttribute(`style`, `display: none;`)
+    quizQuestion.textContent = `Sorry your time has run out!`
+    b1.textContent = `Click Here to Try Again.`
     // b1.addEventListener(`click`, )
 }
 
