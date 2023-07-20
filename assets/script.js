@@ -76,6 +76,8 @@ var checkAnswer = (event) => {
         if (quizIndex > quiz.length - 1) {
             showResults();
         } else {
+            // setTime();
+            console.log(secondsLeft)
             quizQuestion.innerHTML = quiz[quizIndex].question
             b1.innerHTML = quiz[quizIndex].options[0]
             b2.innerHTML = quiz[quizIndex].options[1]
@@ -87,6 +89,8 @@ var checkAnswer = (event) => {
         }
 
     } else {
+        
+        console.log(`false = ${secondsLeft}`)
         quizQuestion.innerHTML = quiz[0].question
         b1.innerHTML = quiz[0].options[0]
         b2.innerHTML = quiz[0].options[1]
@@ -95,6 +99,7 @@ var checkAnswer = (event) => {
         correctAnswer = quiz[0].answer
         started = true;
         setTime();
+        
     }
 }
 
@@ -104,14 +109,14 @@ function updateTimer() {
 
 var stopTimerID;
 var stopTimerID_array = [];
-var secondsLeft = 21;
+var secondsLeft = 11;
 function setTime() {
         stopTimerID = window.setInterval(function () {
         secondsLeft--;
         updateTimer();
         // console.log(`${secondsLeft}`)
         if (secondsLeft <= 0) {
-            secondsLeft = 21;
+            secondsLeft = 11;
             timerFailState();
         }
     }, 1000)
