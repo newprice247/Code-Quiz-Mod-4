@@ -49,10 +49,10 @@ const quiz = [
 
 // var score = 0;
 
-// quizButtons.forEach(element => {
-//     element.setAttribute(`style`, `display: none;`)
-// })
-// b1.removeAttribute(`style`, `display: none;`)
+quizButtons.forEach(element => {
+    element.setAttribute(`style`, `display: none;`)
+})
+b1.removeAttribute(`style`, `display: none;`)
 
 
 
@@ -92,6 +92,8 @@ const quiz = [
 //     test()
 // })
 // var started = false;
+quizQuestion.textContent = `Welcome to the Code Quiz!`
+
 var correctAnswer;
 var quizIndex =0;
 started = false;
@@ -99,15 +101,22 @@ var score = 0;
 var quizIndex = 0;
 
 var checkAnswer = (event) => {
-    console.log('l;kj')
+    console.log(`event fired + ${quizIndex}`)
+    
+    quizButtons.forEach(element => {
+        element.removeAttribute(`style`, `display: none;`)
+    })
     const choice = event.target.innerHTML;
 
     if (started) {
+
         if (choice === correctAnswer) {
             score += 25;
-
         } 
+
         quizIndex++
+        console.log(quizIndex)
+
         if (quizIndex > quiz.length - 1) {
             showResults();
         } else {
@@ -119,14 +128,16 @@ var checkAnswer = (event) => {
         correctAnswer = quiz[quizIndex].answer
         console.log(score)
         console.log(quizIndex)}
+
     } else {
+        quizQuestion.innerHTML = quiz[0].question
         b1.innerHTML = quiz[0].options[0]
         b2.innerHTML = quiz[0].options[1]
         b3.innerHTML = quiz[0].options[2]
         b4.innerHTML = quiz[0].options[3]
         correctAnswer = quiz[0].answer
         started = true;
-        setTime();
+        // setTime();
     }
     // const choice = event.target.className;
 }
@@ -162,13 +173,18 @@ function timerFailState() {
 }
 
 var showResults = () => {
-    started = false
+    started = false;
     quizQuestion.textContent = `Your Final Score was ${score}`
+    score = 0;
+    quizIndex = 0;
     quizButtons.forEach(element => {
         element.setAttribute(`style`, `display: none;`)
     })
     b1.removeAttribute(`style`, `display: none;`)
     b1.textContent= `Click Here to Try Again.`
+    console.log(quizIndex)
+    console.log(score)
+    console.log(started)
     
 }
 
