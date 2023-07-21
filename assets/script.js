@@ -12,12 +12,12 @@ var scorePage = document.getElementById(`scorePage`);
 var quizQuestion = document.getElementById(`quiz-question`);
 var scoreLink = document.getElementById("score-link");
 var quizButtons = document.querySelectorAll(`.quizButtons`);
-var backToQuiz = document.getElementById(`backToQuiz`);
+var submitHS = document.getElementById(`submitHS`);
 var resultsQ = document.getElementById(`resultsQ`)
 var form = document.getElementById(`form`);
 var correctAnswer;
 var quizIndex = 0;
-var score = 0;
+var totalScore = 0;
 started = false;
 quizButtons.forEach(element => {
     element.setAttribute(`style`, `display: none;`)
@@ -50,28 +50,27 @@ const quiz = [
         answer: "B: var x;"
     }
 ];
-
 var checkAnswer = (event) => {
     quizButtons.forEach(element => { element.addEventListener(`click`, checkAnswer) })
     timer.style.display = `block`;
     quizQuestion.style.color = `black`;
     startNext.setAttribute(`style`, `display: none;`)
     quizButtons.forEach(element => {
-    element.removeAttribute(`style`, `display: none;`)
-    results.setAttribute(`style`, `display: none;`);
-    resultsQ.textContent = `Would you like to record your High Score?`
-    form.removeAttribute(`style`, `display: none;`)
+        element.removeAttribute(`style`, `display: none;`)
+        results.setAttribute(`style`, `display: none;`);
+        resultsQ.textContent = `Would you like to record your High Score?`
+        form.removeAttribute(`style`, `display: none;`)
     })
     quizBox.removeAttribute(`style`, `display: none;`)
     scoreLink.removeAttribute(`style`, `display: none;`)
     const choice = event.target.innerHTML;
     if (started) {
         if (choice === correctAnswer) {
-            score += 25;
+            totalScore += 25;
             answerResult.style.borderTop = `solid`, `black`;
-            answerResult.textContent = `Correct! Total Score = ${score}/100`
+            answerResult.textContent = `Correct! Total Score = ${totalScore}/100`
         } else {
-            answerResult.innerHTML = `Wrong! The correct answer was: <br>${quiz[quizIndex].answer} <br>Total Score = ${score}/100`
+            answerResult.innerHTML = `Wrong! The correct answer was: <br>${quiz[quizIndex].answer} <br>Total Score = ${totalScore}/100`
         }
         quizIndex++
         if (quizIndex > quiz.length - 1) {
@@ -85,6 +84,7 @@ var checkAnswer = (event) => {
             correctAnswer = quiz[quizIndex].answer
         }
     } else {
+        totalScore = 0;
         console.log(`false = ${secondsLeft}`)
         quizQuestion.innerHTML = quiz[0].question
         b1.innerHTML = quiz[0].options[0]
@@ -128,30 +128,22 @@ function callClearInterval() {
 
 function timerFailState() {
     reset();
-    score = 0;
     quizQuestion.textContent = `Sorry your time has run out!`
     quizQuestion.style.color = `red`
     startNext.textContent = `Click Here to Try Again.`
 }
 
-var initials = document.getElementById("initials");
-
-// var highScore = {
-//     initials: initials.value.trim()
-//   };
-
 var showResults = () => {
     reset();
-    quizQuestion.textContent = `Your Final Score was ${score}/100`
+    quizQuestion.textContent = `Your Final Score was ${totalScore}/100`
     startNext.textContent = `Click Here to Try Again`
-    score = 0;
 }
 
 var userHighScores = () => {
     results.removeAttribute(`style`, `display: none;`);
     quizBox.setAttribute(`style`, `display: none;`)
     scoreLink.setAttribute(`style`, `display: none;`)
-    backToQuiz.textContent = ``;
+    submitHS.textContent = ``;
     resultsQ.textContent = `User High Scores:`
     form.setAttribute(`style`, `display: none;`)
 
@@ -173,6 +165,36 @@ function reset() {
 }
 
 startNext.addEventListener(`click`, checkAnswer)
+
+var initials = document.getElementById(`initials`);
+var submitHS = document.getElementById(`submitHS`);
+
+function saveHighScore () {
+    var userScoreObject ={
+        user: initials.value.trim(),
+        score: totalScore
+    }
+    console.log(userScoreObject)
+    localStorage.setItem(`userScoreObject`, JSON.stringify(userScoreObject))
+}
+
+function renderHighScore() {
+    var highScore = JSON.parse(localStorage.getItem(`userScoreObject`));
+    if (highScore !== null) {
+        document.getElementById('savedHS').innerHTML = `Name: ${highScore.user} | Score: ${highScore.score}`
+    }
+}
+
+submitHS.addEventListener(`click`, function (e) {
+    e.preventDefault();
+    saveHighScore();
+    renderHighScore();
+});
+
+function init() {
+    renderHighScore()
+}
+init();
 
 
 

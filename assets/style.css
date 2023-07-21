@@ -23,7 +23,7 @@ header a:hover {
 
 header p {
     color: blue;
-    font-size: 1.5em;
+    font-size: 1.1em;
 }
 
 #container {
@@ -67,7 +67,7 @@ h2 {
 
 #quiz-box p {
     color: rgb(131, 131, 131);
-    font-size: 2em;
+    font-size: 1.5em;
     text-align: left;
     margin: .6em;
     padding-top: .3em;

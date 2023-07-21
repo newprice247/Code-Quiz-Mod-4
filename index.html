@@ -27,9 +27,10 @@
                 <h2 id="resultsQ">Would you like to record your High Score?</h2>
                 <form id="form">
                     <label for="initials">Enter your initials</label><br>
-                    <input type="initials" name="userInitials">
+                    <input type="text" id="initials" name="userInitials" value="">
                 </form>
-                <button id="backToQuiz">Submit High Score</button>
+                <button id="submitHS">Submit High Score</button>
+                <p>High Scores:<br><span id="savedHS"></span></p>
             </section>
             <button id="startNext" class="button">Start Quiz</button>
             <!-- <section id="scorePage"></section> -->
