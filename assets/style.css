@@ -30,25 +30,25 @@ header p {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 #quiz-box {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    border: .3em solid black;
+    flex-direction: column;
     border-radius: .5em;
     width: 60vw;
-    padding-bottom: 3em;
 }
 
-#quiz-box h1 {
+h2 {
     font-size: 1.5em;
     margin: 1em;
+    text-align: center;
 
 }
 
-#quiz-box button {
+.button {
     font-size: large;
     margin: .5em;
     padding: .7em;
@@ -60,7 +60,7 @@ header p {
     border-radius: .5em;
 }
 
-#quiz-box button:hover {
+.button:hover {
     background-color: rgb(167, 63, 167);
     box-shadow: 0 0 5px purple;
 }
@@ -72,4 +72,14 @@ header p {
     margin: .6em;
     padding-top: .3em;
 
+}
+
+.results {
+    text-align: center;
+}
+
+#startNext {
+    width: 30%;
+    text-align: center;
+    margin-top: 2em;
 }

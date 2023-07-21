@@ -13,16 +13,15 @@ var quizQuestion = document.getElementById(`quiz-question`);
 var scoreLink = document.getElementById("score-link");
 var quizButtons = document.querySelectorAll(`.quizButtons`);
 var backToQuiz = document.getElementById(`backToQuiz`);
+var resultsQ = document.getElementById(`resultsQ`)
+var form = document.getElementById(`form`);
 var correctAnswer;
 var quizIndex = 0;
 var score = 0;
 started = false;
-scoreLink.style.display = `block`;
 quizButtons.forEach(element => {
     element.setAttribute(`style`, `display: none;`)
 })
-quizQuestion.textContent = `Welcome to the Code Quiz!`;
-startNext.textContent = `Please Click Here to Continue`;
 
 results.setAttribute(`style`, `display: none;`);
 
@@ -55,12 +54,16 @@ const quiz = [
 var checkAnswer = (event) => {
     quizButtons.forEach(element => { element.addEventListener(`click`, checkAnswer) })
     timer.style.display = `block`;
-    console.log(`event fired + ${quizIndex}`)
     quizQuestion.style.color = `black`;
     startNext.setAttribute(`style`, `display: none;`)
     quizButtons.forEach(element => {
-        element.removeAttribute(`style`, `display: none;`)
+    element.removeAttribute(`style`, `display: none;`)
+    results.setAttribute(`style`, `display: none;`);
+    resultsQ.textContent = `Would you like to record your High Score?`
+    form.removeAttribute(`style`, `display: none;`)
     })
+    quizBox.removeAttribute(`style`, `display: none;`)
+    scoreLink.removeAttribute(`style`, `display: none;`)
     const choice = event.target.innerHTML;
     if (started) {
         if (choice === correctAnswer) {
@@ -140,16 +143,18 @@ var initials = document.getElementById("initials");
 var showResults = () => {
     reset();
     quizQuestion.textContent = `Your Final Score was ${score}/100`
-    startNext.textContent = `Click Here to Try Again.`
+    startNext.textContent = `Click Here to Try Again`
     score = 0;
-    results.style.display = `inline`;
 }
 
 var userHighScores = () => {
     results.removeAttribute(`style`, `display: none;`);
-    quizBox.style.display = `none`;
-    scoreLink.style.display = `none`;
-    backToQuiz.textContent = `Start Again?`;
+    quizBox.setAttribute(`style`, `display: none;`)
+    scoreLink.setAttribute(`style`, `display: none;`)
+    backToQuiz.textContent = ``;
+    resultsQ.textContent = `User High Scores:`
+    form.setAttribute(`style`, `display: none;`)
+
 }
 
 function reset() {
@@ -164,6 +169,7 @@ function reset() {
         element.setAttribute(`style`, `display: none;`)
     })
     answerResult.style.borderTop = `none`;
+    results.removeAttribute(`style`, `display: none;`);
 }
 
 startNext.addEventListener(`click`, checkAnswer)

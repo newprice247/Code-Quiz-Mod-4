@@ -16,22 +16,22 @@
     <main>
         <section id="container">
             <section id="quiz-box">
-                <h1 id="quiz-question"></h1>
-                <button class="quizButtons" id="b1" data-state="unanswered"></button>
-                <button class="quizButtons" id="b2" data-state="unanswered"></button>
-                <button class="quizButtons" id="b3" data-state="unanswered"></button>
-                <button class="quizButtons" id="b4" data-state="unanswered"></button>
+                <h2 id="quiz-question">Welcome to the Code Quiz!</h2>
+                <button class="quizButtons button" id="b1" data-state="unanswered"></button>
+                <button class="quizButtons button" id="b2" data-state="unanswered"></button>
+                <button class="quizButtons button" id="b3" data-state="unanswered"></button>
+                <button class="quizButtons button" id="b4" data-state="unanswered"></button>
                 <p id="answer-result"></p>
-                <button id="startNext"></button>
             </section>
             <section class="results">
-                <h2>Enter your initials below to record your high score:</h2>
-                <form>
+                <h2 id="resultsQ">Would you like to record your High Score?</h2>
+                <form id="form">
                     <label for="initials">Enter your initials</label><br>
                     <input type="initials" name="userInitials">
                 </form>
-                <button id="backToQuiz"></button>
+                <button id="backToQuiz">Submit High Score</button>
             </section>
+            <button id="startNext" class="button">Start Quiz</button>
             <!-- <section id="scorePage"></section> -->
         </section>
 
