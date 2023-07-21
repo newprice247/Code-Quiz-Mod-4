@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./assets/style.css">
 </head>
+
 <body>
     <header>
         <a href="#" id="score-link">View High Scores</a>
@@ -15,18 +17,27 @@
         <section id="container">
             <section id="quiz-box">
                 <h1 id="quiz-question"></h1>
-                <button class="quiz-buttons" id="b1"></button>
-                <button class="quiz-buttons" id="b2"></button>
-                <button class="quiz-buttons" id="b3"></button>
-                <button class="quiz-buttons" id="b4"></button>
+                <button class="quizButtons" id="b1" data-state="unanswered"></button>
+                <button class="quizButtons" id="b2" data-state="unanswered"></button>
+                <button class="quizButtons" id="b3" data-state="unanswered"></button>
+                <button class="quizButtons" id="b4" data-state="unanswered"></button>
                 <p id="answer-result"></p>
-                <form action="post"></form>
                 <button id="startNext"></button>
             </section>
+            <section class="results">
+                <h2>Enter your initials below to record your high score:</h2>
+                <form>
+                    <label for="initials">Enter your initials</label><br>
+                    <input type="initials" name="userInitials">
+                </form>
+                <button id="backToQuiz"></button>
+            </section>
+            <!-- <section id="scorePage"></section> -->
         </section>
 
     </main>
-    
+
     <script src="./assets/script.js"></script>
 </body>
+
 </html>
