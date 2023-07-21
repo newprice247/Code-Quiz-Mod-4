@@ -54,11 +54,11 @@ var checkAnswer = (event) => {
         if (choice === correctAnswer) {
             totalScore += 25;
             answerResult.style.borderTop = `solid`, `black`;
-            answerResult.textContent = `Correct! Total Score = ${totalScore}/100`
+            answerResult.innerHTML = `Correct!<br> Total Score = ${totalScore}/100`
         } else {
             secondsLeft -= 3;
             answerResult.style.borderTop = `solid`, `black`;
-            answerResult.innerHTML = `Wrong! The correct answer was: <br>${quiz[quizIndex].answer} <br>Total Score = ${totalScore}/100`
+            answerResult.innerHTML = `Wrong!<br> The correct answer was: <br>${quiz[quizIndex].answer} <br>Total Score = ${totalScore}/100`
         }
         quizIndex++
         if (quizIndex > quiz.length - 1) {
