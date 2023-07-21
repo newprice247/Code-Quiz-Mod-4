@@ -19,15 +19,11 @@ var correctAnswer;
 var quizIndex = 0;
 var totalScore = 0;
 started = false;
-quizButtons.forEach(element => {
-    element.setAttribute(`style`, `display: none;`)
-})
-
-results.setAttribute(`style`, `display: none;`);
 
 scoreLink.addEventListener(`click`, function () {
     userHighScores();
 })
+
 const quiz = [
     {
         question: "What is the output of the following code? console.log(10 % 3);",
@@ -51,18 +47,8 @@ const quiz = [
     }
 ];
 var checkAnswer = (event) => {
-    quizButtons.forEach(element => { element.addEventListener(`click`, checkAnswer) })
-    timer.style.display = `block`;
-    quizQuestion.style.color = `black`;
-    startNext.setAttribute(`style`, `display: none;`)
-    quizButtons.forEach(element => {
-        element.removeAttribute(`style`, `display: none;`)
-        results.setAttribute(`style`, `display: none;`);
-        resultsQ.textContent = `Would you like to record your High Score?`
-        form.removeAttribute(`style`, `display: none;`)
-    })
-    quizBox.removeAttribute(`style`, `display: none;`)
-    scoreLink.removeAttribute(`style`, `display: none;`)
+    uiSwitch(checkAnswer);
+    quizButtons.forEach(element => {element.addEventListener(`click`, checkAnswer)});
     const choice = event.target.innerHTML;
     if (started) {
         if (choice === correctAnswer) {
@@ -70,6 +56,8 @@ var checkAnswer = (event) => {
             answerResult.style.borderTop = `solid`, `black`;
             answerResult.textContent = `Correct! Total Score = ${totalScore}/100`
         } else {
+            secondsLeft -= 3;
+            answerResult.style.borderTop = `solid`, `black`;
             answerResult.innerHTML = `Wrong! The correct answer was: <br>${quiz[quizIndex].answer} <br>Total Score = ${totalScore}/100`
         }
         quizIndex++
@@ -100,14 +88,14 @@ var checkAnswer = (event) => {
 
 var stopTimerID;
 var stopTimerID_array = [];
-var secondsLeft = 11;
+var secondsLeft = 21;
 function setTime() {
     stopTimerID = window.setInterval(function () {
         secondsLeft--;
         updateTimer();
         console.log(`array: ${stopTimerID_array} seconds:${secondsLeft}`)
         if (secondsLeft <= 0) {
-            secondsLeft = 11;
+            secondsLeft = 21;
             timerFailState();
         }
     }, 1000)
@@ -128,6 +116,7 @@ function callClearInterval() {
 
 function timerFailState() {
     reset();
+    uiSwitch(timerFailState)
     quizQuestion.textContent = `Sorry your time has run out!`
     quizQuestion.style.color = `red`
     startNext.textContent = `Click Here to Try Again.`
@@ -140,28 +129,16 @@ var showResults = () => {
 }
 
 var userHighScores = () => {
-    results.removeAttribute(`style`, `display: none;`);
-    quizBox.setAttribute(`style`, `display: none;`)
-    scoreLink.setAttribute(`style`, `display: none;`)
-    submitHS.textContent = ``;
-    resultsQ.textContent = `User High Scores:`
-    form.setAttribute(`style`, `display: none;`)
-
+    reset();
+    uiSwitch(userHighScores);
 }
 
 function reset() {
     callClearInterval();
-    secondsLeft = 11;
+    uiSwitch(reset);
+    secondsLeft = 21;
     started = false;
     quizIndex = 0;
-    answerResult.textContent = '';
-    timer.style.display = `none`;
-    startNext.removeAttribute(`style`, `display: none;`)
-    quizButtons.forEach(element => {
-        element.setAttribute(`style`, `display: none;`)
-    })
-    answerResult.style.borderTop = `none`;
-    results.removeAttribute(`style`, `display: none;`);
 }
 
 startNext.addEventListener(`click`, checkAnswer)
@@ -169,8 +146,8 @@ startNext.addEventListener(`click`, checkAnswer)
 var initials = document.getElementById(`initials`);
 var submitHS = document.getElementById(`submitHS`);
 
-function saveHighScore () {
-    var userScoreObject ={
+function saveHighScore() {
+    var userScoreObject = {
         user: initials.value.trim(),
         score: totalScore
     }
@@ -181,7 +158,7 @@ function saveHighScore () {
 function renderHighScore() {
     var highScore = JSON.parse(localStorage.getItem(`userScoreObject`));
     if (highScore !== null) {
-        document.getElementById('savedHS').innerHTML = `Name: ${highScore.user} | Score: ${highScore.score}`
+        document.getElementById('savedHS').innerHTML += `Name: ${highScore.user} | Score: ${highScore.score}<br>`
     }
 }
 
@@ -189,10 +166,51 @@ submitHS.addEventListener(`click`, function (e) {
     e.preventDefault();
     saveHighScore();
     renderHighScore();
+    userHighScores();
 });
+
+function uiSwitch(e) {
+    if (e === userHighScores) {
+        results.removeAttribute(`style`, `display: none;`);
+        quizBox.setAttribute(`style`, `display: none;`)
+        scoreLink.setAttribute(`style`, `display: none;`)
+        submitHS.setAttribute(`style`, `display: none;`)
+        resultsQ.textContent = `Code Quiz Leaderboard`
+        form.setAttribute(`style`, `display: none;`)
+    } else if (e === reset) {
+        answerResult.textContent = '';
+        timer.style.display = `none`;
+        startNext.removeAttribute(`style`, `display: none;`)
+        answerResult.style.borderTop = `none`;
+        results.removeAttribute(`style`, `display: none;`);
+        quizButtons.forEach(element => {
+            element.setAttribute(`style`, `display: none;`)
+        })
+    } else if (e === timerFailState) {
+        results.setAttribute(`style`, `display: none;`)
+    } else if (e === checkAnswer) {
+        timer.style.display = `block`;
+        quizQuestion.style.color = `black`;
+        startNext.setAttribute(`style`, `display: none;`)
+        quizButtons.forEach(element => {
+            element.removeAttribute(`style`, `display: none;`)
+        })
+        results.setAttribute(`style`, `display: none;`);
+        resultsQ.textContent = `Would you like to record your High Score?`
+        submitHS.removeAttribute(`style`, `display: none;`)
+        form.removeAttribute(`style`, `display: none;`)
+        quizBox.removeAttribute(`style`, `display: none;`)
+        scoreLink.removeAttribute(`style`, `display: none;`)
+    }
+}
 
 function init() {
     renderHighScore()
+    localStorage.clear();
+    quizButtons.forEach(element => {
+        element.setAttribute(`style`, `display: none;`)
+    })
+    results.setAttribute(`style`, `display: none;`);
 }
 init();
 

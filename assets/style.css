@@ -78,6 +78,19 @@ h2 {
     text-align: center;
 }
 
+#initials {
+    margin: 1em;
+}
+
+#initials:hover {
+    box-shadow: 0 0 1px blue;
+}
+
+.results p {
+    margin: 2em;
+    font-size: 1.5em;
+}
+
 #startNext {
     width: 30%;
     text-align: center;
