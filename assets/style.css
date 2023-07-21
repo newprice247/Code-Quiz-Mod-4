@@ -99,6 +99,14 @@ h2 {
 
 @media screen and (max-width: 480px) {
 
+    #quiz-question {
+        font-size: 90%;
+    }
+
+    .results span {
+        font-size: 80%;
+    }
+
     header p {
         font-size: 80%;
     }
