@@ -70,7 +70,7 @@ var checkAnswer = (event) => {
             answerResult.style.borderTop = `solid`, `black`;
             answerResult.innerHTML = `Correct!<br> Total Score = ${totalScore}/100`
         } else {
-            secondsLeft -= 3;
+            secondsLeft -= 15;
             answerResult.style.borderTop = `solid`, `black`;
             answerResult.innerHTML = `Wrong!<br> The correct answer was: <br>${quiz[quizIndex].answer} <br>Total Score = ${totalScore}/100`
         }
@@ -195,8 +195,8 @@ submitHS.addEventListener(`click`, function (e) {
 });
 
 //Stores style attributes that can be called upon to dynamically change the appearance of the page
-function uiSwitch(e) {
-    if (e === userHighScores) {
+function uiSwitch(ui) {
+    if (ui === userHighScores) {
         leaderboard.removeAttribute(`style`, `display: none;`)
         results.removeAttribute(`style`, `display: none;`);
         quizBox.setAttribute(`style`, `display: none;`)
@@ -204,7 +204,7 @@ function uiSwitch(e) {
         submitHS.setAttribute(`style`, `display: none;`)
         resultsQ.textContent = `Code Quiz Leaderboard`
         form.setAttribute(`style`, `display: none;`)
-    } else if (e === reset) {
+    } else if (ui === reset) {
         answerResult.textContent = '';
         timer.style.display = `none`;
         startNext.removeAttribute(`style`, `display: none;`)
@@ -214,9 +214,9 @@ function uiSwitch(e) {
             element.setAttribute(`style`, `display: none;`)
         })
         leaderboard.setAttribute(`style`, `display: none;`)
-    } else if (e === timerFailState) {
+    } else if (ui === timerFailState) {
         results.setAttribute(`style`, `display: none;`)
-    } else if (e === checkAnswer) {
+    } else if (ui === checkAnswer) {
         timer.style.display = `block`;
         quizQuestion.style.color = `black`;
         startNext.setAttribute(`style`, `display: none;`)
