@@ -97,6 +97,7 @@ h2 {
     margin-top: 2em;
 }
 
+/* media query for smaller devices */
 @media screen and (max-width: 480px) {
 
     #quiz-question {
