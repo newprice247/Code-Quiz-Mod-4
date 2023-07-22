@@ -19,7 +19,7 @@ The goal of this project was to build a web app that functions as a timed coding
 [ Click Here to View Depoloyed Website](https://newprice247.github.io/Code-Quiz-Mod-4/)
 
 
-(![Code Quiz Screenshot](./assets/code-quiz-screenshot.png))
+![Code Quiz Screenshot](./assets/code-quiz-screenshot.png))
 
 ## Contact Me
 
