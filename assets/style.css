@@ -4,6 +4,7 @@
     padding: 0;
 }
 
+
 header {
     display: flex;
     flex-direction: row;
@@ -15,6 +16,7 @@ header {
 header a {
     text-decoration: none;
     color: purple;
+    font-size: 1.2em;
 }
 
 header a:hover {
@@ -22,7 +24,7 @@ header a:hover {
 }
 
 header p {
-    color: blue;
+    color: rgb(191, 0, 230);
     font-size: 1.1em;
 }
 
@@ -31,6 +33,7 @@ header p {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    background-color: ;
 }
 
 #quiz-box {
@@ -42,7 +45,7 @@ header p {
 }
 
 h2 {
-    font-size: 1.5em;
+    font-size: 2em;
     margin: 1em;
     text-align: center;
 

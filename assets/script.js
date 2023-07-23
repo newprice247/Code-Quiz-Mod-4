@@ -128,7 +128,7 @@ function setTime() {
 
 // Shows the user a message on screen of their remaining time
 function updateTimer() {
-    timer.textContent = `Seconds left to complete quiz: ${secondsLeft}`
+    timer.textContent = `${secondsLeft} seconds left!`
 }
 
 // Loops through the the timer IDs stored in the stopTimerID_array, and when called, will stop them from counting down
@@ -218,7 +218,6 @@ function uiSwitch(ui) {
         results.setAttribute(`style`, `display: none;`)
     } else if (ui === checkAnswer) {
         timer.style.display = `block`;
-        quizQuestion.style.color = `black`;
         startNext.setAttribute(`style`, `display: none;`)
         quizButtons.forEach(element => {
             element.removeAttribute(`style`, `display: none;`)
