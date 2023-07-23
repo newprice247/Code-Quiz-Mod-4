@@ -2,7 +2,7 @@
 
 ## Description
 
-The goal of this project was to build a web app that functions as a timed coding quiz. It features dynamically updated HTML and CSS powered by JavaScript. 
+The goal of this project was to build a web app that functions as a timed coding quiz. It features dynamically updated HTML and CSS powered by JavaScript. The quiz tests the user's knowledge of basic Javascript trivia, gives them a score based on the number of correct answers they choose, and allows the user to save those scores to a leaderboard.
 
 ## Finished Project
 
