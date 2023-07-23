@@ -2,7 +2,7 @@
 
 ## Description
 
-The goal of this project was to build a web app that functions as a timed coding quiz. It features dynamically updated HTML and CSS powered by JavaScript. 
+The goal of this project was to build a web app that functions as a timed coding quiz. It features dynamically updated HTML and CSS powered by JavaScript. The quiz tests the user's knowledge of basic Javascript trivia, gives them a score based on the number of correct answers they choose, and allows the user to save those scores to a leaderboard.
 
 ## Finished Project
 
@@ -10,16 +10,16 @@ The goal of this project was to build a web app that functions as a timed coding
 
 * Upon loading the initial page, there is a link to view other user's high scores, a code-quiz title and welcome message, and a button that when clicked starts the questionaire and a countdown timer.
 * Once the quiz begins, the user has 60 seconds to complete the quiz, and the remaining time as it counts down is displayed on-screen. If a correct answer is chosen, the user's score is increased and a message of 'Correct!' is displayed on screen. If an incorrect answer is chosen, the timer countdown has 15 seconds subtracted and a 'Wrong!' message ,as well as which answer was correct, is displayed on-screen.
-* As the questionare continues, the user will choose if they want a variety of different characters including numbers, upper- and lower-case letters, and special characters(ex. @#$%@!).
-* If the user doesn't choose any of the characters provided, an alert window displays to inform the user to choose at least one set of characters, and the questionare resets.
-* Based on the user's chosen characters and password length, a random password will be generated and displayed on screen inside of the empty container above the generate button.
+* Once the user reaches the end of the quiz, they will be prompted to enter their name in a text field, which will add their name to a leaderboard of high scores. They can then click the button provided to start the quiz from the beginning and try again.
+* If the countdown timer reaches zero, the quiz ends and a `Sorry you ran out of time` message is displayed, as well as a button to start the quiz from the beginning.
+* The app is also responsive, making it possible to take the quiz on a smaller screen such as a phone.
 
 ### Deployed Website
 
-[ Click Here to View Portfolio Website](https://newprice247.github.io/Random-Password-Gen/)
+[ Click Here to View Depoloyed Website](https://newprice247.github.io/Code-Quiz-Mod-4/)
 
 
-![Screenshot of Random Password Generator website](./Assets/screenshot-rpg.png)
+![Code Quiz Screenshot](./assets/code-quiz-screenshot.png)
 
 ## Contact Me
 
